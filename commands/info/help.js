@@ -40,8 +40,16 @@ module.exports = {
             .setColor(0x00FF00)
             .setTimestamp()
             .setFooter({ text: `Mineek's Bot | Made by Mineek#6323` });
+        const categories = [];
         interaction.client.commands.forEach(cmd => {
-            embed.addFields({ name: cmd.info.name, value: cmd.info.description, inline: true });
+            if (!categories.includes(cmd.info.category)) categories.push(cmd.info.category);
+        });
+        categories.forEach(category => {
+            interaction.client.commands.forEach(cmd => {
+                if (cmd.info.category === category) {
+                    embed.addFields({ name: category, value: `\`${cmd.info.name}\` - ${cmd.info.description}`, inline: false });
+                }
+            });
         });
         return interaction.reply({ embeds: [embed] });
     }
