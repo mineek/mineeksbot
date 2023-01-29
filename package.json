@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  },
+  "name": "mineeksbot",
+  "version": "1.0.0",
+  "description": "funny discord bot",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mineek"
+}
