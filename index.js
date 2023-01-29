@@ -3,7 +3,7 @@ const { token, guildID, ownerID } = require('./config.json');
 const fs = require('fs');
 const { dir } = require('console');
 const {successEmbed, errorEmbed} = require('./helpers/embeds.js');
-const {checkPermissionsEmbed, checkPermissions} = require('./helpers/permissions.js');
+const {checkPermissions} = require('./helpers/permissions.js');
 
 const log = (msg) => console.log(`[${new Date().toLocaleTimeString()}] -> ${msg}`);
 
@@ -60,7 +60,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (!command) return;
     if (command.info.permissions.length > 0) {
         if (!checkPermissions(interaction.member, command.info.permissions)) {
-            return interaction.reply({ embeds: [checkPermissionsEmbed(command.info.permissions)] });
+            await interaction.reply({ embeds: [errorEmbed('You do not have permission to use this command!')] });
+            return;
         }
     }
     log(`Command ${command.info.name} executed by ${interaction.user.tag} (${interaction.user.id})`);

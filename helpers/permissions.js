@@ -2,20 +2,20 @@ const {ownerID} = require('../config.json');
 const {errorEmbed} = require('./embeds.js');
 
 const checkPermissions = (interaction, permissions) => {
-    if (!interaction.member) return false;
-    if (interaction.member.id === ownerID) return true;
+    if (interaction.user.id === ownerID) return true;
     if (permissions.length === 0) return true;
-    const memberPermissions = interaction.member.permissions;
-    return permissions.every(permission => memberPermissions.has(permission));
-}
-
-const checkPermissionsEmbed = (interaction, permissions) => {
-    if (!checkPermissions(interaction, permissions)) {
-        return interaction.reply({ embeds: [errorEmbed(`You don't have the required permissions to run this command!`)] });
+    if (permissions.includes('OWNER')) return false;
+    const guild = interaction.guild;
+    const member = guild.members.cache.get(interaction.user.id);
+    const perms = member.permissions.toArray();
+    for (const perm of permissions) {
+        if (!perms.includes(perm)) {
+            return false;
+        }
     }
+    return true;
 }
 
 module.exports = {
-    checkPermissions,
-    checkPermissionsEmbed
+    checkPermissions
 };
