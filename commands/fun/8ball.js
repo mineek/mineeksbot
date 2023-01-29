@@ -41,11 +41,11 @@ module.exports = {
         const response = responses[Math.floor(Math.random() * responses.length)];
         const embed = new EmbedBuilder()
             .setTitle('8ball')
-            .setDescription(`${interaction.user.username} asked ${question}`)
             .addFields({ name: "Answer", value: response })
             .setTimestamp()
             .setFooter({text: "Mineek's Bot | Made by Mineek#6323"})
-            .setColor(0x00FF00);
+            .setColor(0x00FF00)
+            .setAuthor({ name: interaction.user.username, iconURL: interaction.user.avatarURL({ dynamic: true }) });
         return interaction.reply({ embeds: [embed] });
     }
 };
