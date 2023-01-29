@@ -75,7 +75,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
     catch (error) {
         console.error(error);
-        await interaction.reply({ embeds: [errorEmbed('An error occurred while executing this command!')] });
+        await interaction.reply({ embeds: [errorEmbed('An error occurred while executing this command!')], ephemeral: true });
     }
 });
 

@@ -41,6 +41,7 @@ module.exports = {
         const response = responses[Math.floor(Math.random() * responses.length)];
         const embed = new EmbedBuilder()
             .setTitle('8ball')
+            .setDescription(`${question}`)
             .addFields({ name: "Answer", value: response })
             .setTimestamp()
             .setFooter({text: "Mineek's Bot | Made by Mineek#6323"})
