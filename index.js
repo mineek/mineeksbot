@@ -61,7 +61,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (command.info.permissions.length > 0) {
         if (!checkPermissions(interaction.member, command.info.permissions)) {
             try {
-                await interaction.reply({ embeds: [errorEmbed('You do not have permission to use this command!')] });
+                await interaction.reply({ embeds: [errorEmbed('You do not have permission to use this command!')], ephemeral: true });
             }
             catch (error) {
                 log(`Failed to send error message to ${interaction.user.tag} (${interaction.user.id})`);
